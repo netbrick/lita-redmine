@@ -1,13 +1,13 @@
 # lita-redmine
 
-TODO: Add a description of the plugin.
+Lita Redmine Plugin - redmine handlers
 
 ## Installation
 
 Add lita-redmine to your Lita instance's Gemfile:
 
 ``` ruby
-gem "lita-redmine"
+gem "lita-redmine", git: ‘https://github.com/netbrick/lita-redmine’, branch: ‘master’
 ```
 
 ## Configuration
