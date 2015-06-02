@@ -66,7 +66,7 @@ module Lita
         apitoken = get_user_token(response.user.id)
         issue_id = response.matches.flatten.first
         issue =  get_issue(config.url, apitoken, issue_id)
-        response.reply "##{issue_id}: #{issue['subject']}"
+        response.reply "##{issue_id}: (#{issue['project']['name']}) #{issue['subject']}"
       end
 
       def issue_note(response)
