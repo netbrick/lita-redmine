@@ -18,6 +18,7 @@ add into lita_config.rb Redmine URL
 Lita.configure do |config|
 ...
   config.handlers.redmine.url = "https://redmine.site.cz"
+  config.handlers.redmine.secret_key = "<secret key to encrypt tokens in redis>"
 ...
 end
 ```

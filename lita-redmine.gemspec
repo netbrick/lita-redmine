@@ -17,6 +17,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency "lita", ">= 4.3"
   spec.add_runtime_dependency "resource_kit"
   spec.add_runtime_dependency "json"
+  spec.add_runtime_dependency "crypt"
 
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "pry-byebug"
