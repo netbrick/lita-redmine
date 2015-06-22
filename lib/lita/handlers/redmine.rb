@@ -10,18 +10,18 @@ module Lita
 
       route /^(redmine|rm)\slist\s([a-zA-Z_]+)/, :list_objects, help: { "redmine|rm list <object #>" => "Redmine list objects, calls Redmine API as /:object.json" }
 
-      route /^(redmine|rm)\stime entry\snew\s\[(\d+)\]\s\[(.+)\]\s\[(.+)\]\s\[(.+)\]/, :time_entry_new, help: { "redmine|rm time entry new [Issue_id] [Hours] [Activity name] [Comment]" => "Create new time entry with today's date" }
+      route /^(redmine|rm)\stime entry\snew\s\[(\d+)\]\s\[([^\[\]]+)\]\s\[([^\[\]]+)\]\s\[([^\[\]]+)\]/, :time_entry_new, help: { "redmine|rm time entry new [Issue_id] [Hours] [Activity name] [Comment]" => "Create new time entry with today's date" }
 
       route /^(redmine|rm)\sissue\s(\d+)/, :issue, help: { "redmine|rm issue <issue #>" => "Displays issue id and subject" }
       route /^(redmine|rm)\sissue\sclose\s(\d+)/, :issue_close, help: { "redmine|rm issue close <issue #>" => "Selects first status with closing attribute and updates issue to this status" }
       route /^(redmine|rm)\sissue\sdetail\s(\d+)/, :issue_detail, help: { "redmine|rm issue detail <issue #>" => "Displays issue detail" }
       route /^(redmine|rm)\sissue\sjournal\s(\d+)/, :issue_journal, help: { "redmine|rm issue journal <issue #>" => "Displays issue journal" }
       route /^(redmine|rm)\sissue\slink\s(\d+)/, :issue_link, help: { "redmine|rm issue link <issue #>" => "Displays issue link" }
-      route /^(redmine|rm)\sissue\snew\s\[(.+)\]\s\[(.+)\]\s\[(.+)\](.*)/, :issue_new, help: { "redmine|rm issue new [Project name] [Subject] [Description] <firstname secondname>" => "Create new issue, name is optional and selects user to assign issue to" }
-      route /^(redmine|rm)\sissue\sstate\schange\s(\d+)\s\[(.+)\]/, :issue_change_state, help: {"redmine|rm issue state change <issue #> <status_name>" => "Change issue status to specified" }
+      route /^(redmine|rm)\sissue\snew\s\[([^\[\]]+)\]\s\[([^\[\]]+)\]\s\[([^\[\]]+)\](\s\[[^\[\]]+\])?/, :issue_new, help: { "redmine|rm issue new [Project name] [Subject] [Description] [Firstname Secondname]" => "Create new issue, name is optional and selects user to assign issue to" }
+      route /^(redmine|rm)\sissue\sstate\schange\s\[(\d+)\]\s\[([^\[\]]+)\]/, :issue_change_state, help: {"redmine|rm issue state change [Issue_id] [Status_name]" => "Change issue status to specified" }
       route /^(redmine|rm)\sissues/, :issues, help: {"redmine|rm issues" => "List my issues" }
-      route /^(redmine|rm)\sissue\snote\s(\d+)\s(.+)/, :issue_note, help: {"redmine|rm issue note <issue #> note" => "Add note to issue" }
-      route /^(redmine|rm)\sissue\sassign\s(\d+)\s\[(.+)\](.*)/, :issue_assign, help: {"redmine|rm issue assign <issue #> [firstname secondname] <note>" => "Assign issue to user, note is optional" }
+      route /^(redmine|rm)\sissue\snote\s\[(\d+)\]\s\[([^\[\]]+)\]/, :issue_note, help: {"redmine|rm issue note [Issue_id] [Note]" => "Add note to issue" }
+      route /^(redmine|rm)\sissue\sassign\s\[(\d+)\]\s\[([^\[\]]+)\](\s\[[^\[\]]+\])?/, :issue_assign, help: {"redmine|rm issue assign [Issue_id] [Firstname Secondname] [Note]" => "Assign issue to user, note is optional" }
 
       route /^(redmine|rm)\sprojects/, :projects, help: {"redmine|rm projects" => "List my projects" }
 
@@ -66,10 +66,10 @@ module Lita
         if resource.nil?
           response.reply_privately "Token not registered, register token via 'redmine register <api_token>'"
         else
-          issue_id = response.matches.flatten[1].downcase
-          hours = response.matches.flatten[2].downcase
-          activity_name = response.matches.flatten[3].downcase
-          comments = response.matches.flatten[4].downcase
+          issue_id = response.matches.flatten[1]
+          hours = response.matches.flatten[2]
+          activity_name = response.matches.flatten[3]
+          comments = response.matches.flatten[4]
 
           if activity_id = get_activity_by_name(activity_name, resource)
             message = resource.create_entry({issue_id: issue_id, hours: hours, activity_id: activity_id, comments: comments})
@@ -213,7 +213,8 @@ module Lita
         else
           issue_id = response.matches.flatten[1]
           name = response.matches.flatten[2]
-          note = response.matches.flatten[3].strip
+          note = response.matches.flatten[3].nil? ? "" : response.matches.flatten[3].strip
+          note = note[1, note.length - 2]
 
           if user_id = get_user_by_name(name, resource)
             issue = resource.update_issue({ assigned_to_id: user_id, notes: note }, id: issue_id)
@@ -238,7 +239,8 @@ module Lita
           project_name = response.matches.flatten[1]
           subject = response.matches.flatten[2]
           description = response.matches.flatten[3]
-          assignee_name = response.matches.flatten[4].strip
+          assignee_name = response.matches.flatten[4].nil? ? "" : response.matches.flatten[4].strip
+          assignee_name = assignee_name[1, assignee_name.length - 2]
 
           project_id = get_project_by_name(project_name, resource)
           user_id = get_user_by_name(assignee_name, resource)
