@@ -4,7 +4,7 @@ require "#{File.dirname(__FILE__)}/../../resources/redmine_resource"
 
 module Lita
   module Handlers
-    class Redmine < Handler
+    class Redmine2 < Handler
       config :url
       config :secret_key
 
@@ -526,6 +526,6 @@ module Lita
       end
     end
 
-    Lita.register_handler(Redmine)
+    Lita.register_handler(Redmine2)
   end
 end

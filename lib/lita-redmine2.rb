@@ -4,9 +4,9 @@ Lita.load_locales Dir[File.expand_path(
   File.join("..", "..", "locales", "*.yml"), __FILE__
 )]
 
-require "lita/handlers/redmine"
+require "lita/handlers/redmine2"
 
-Lita::Handlers::Redmine.template_root File.expand_path(
+Lita::Handlers::Redmine2.template_root File.expand_path(
   File.join("..", "..", "templates"),
  __FILE__
 )
