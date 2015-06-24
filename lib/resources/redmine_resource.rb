@@ -7,8 +7,8 @@ class RedmineResource < ResourceKit::Resource
     default_handler (401) { |response| { resource_error: "Wrong API token, please register new one" } }
     default_handler (403) { |response| { resource_error: "You are not authorized to do this action" } }
     default_handler (404) { |response| { resource_error: "Server responded with error code 404, please check you have correct parameters" } }
-    default_handler (422) { |response| { resource_error: "Wrong parameters (#{response.body})" } }
-    default_handler { |response| { resource_error: "Unknown error, status: #{response.status}, body: #{response.body}" } }
+    default_handler (422) { |response| { resource_error: "Wrong parameters" } }
+    default_handler { |response| { resource_error: "Unknown error, status: #{response.status}" } }
 
     action :list do
       verb :get
