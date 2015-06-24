@@ -465,7 +465,7 @@ module Lita
         when 'users'
           users = list['users']
           users.each do |u|
-            message << "First name: #{u['firstname']}, last name: #{u['lastname']}\n"
+            message << "#{u['id']}: #{u['firstname']} #{u['lastname']}\n"
           end
         when 'issues'
           issues = list['issues']
