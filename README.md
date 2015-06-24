@@ -7,7 +7,7 @@ Lita Redmine Plugin - Redmine handlers
 Add lita-redmine to your Lita instance's Gemfile:
 
 ``` ruby
-gem "lita-redmine", git: "https://github.com/netbrick/lita-redmine", branch: "master"
+gem "lita-redmine2", git: "https://github.com/netbrick/lita-redmine2", branch: "master"
 ```
 
 ## Configuration
