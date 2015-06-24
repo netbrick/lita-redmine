@@ -315,7 +315,7 @@ module Lita
 
             response.reply message
           else
-            respone.reply_privately issue[:resource_error]
+            response.reply_privately issue[:resource_error]
           end
         end
       end
