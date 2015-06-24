@@ -1,12 +1,12 @@
 Gem::Specification.new do |spec|
-  spec.name          = "lita-redmine"
+  spec.name          = "lita-redmine2"
   spec.version       = "0.1.0"
-  spec.authors       = ["Jindrich Skupa"]
-  spec.email         = ["jindrich.skupa@netbrick.eu"]
-  spec.description   = "TODO: Add a description"
-  spec.summary       = "TODO: Add a summary"
-  spec.homepage      = "TODO: Add a homepage"
-  spec.license       = "TODO: Add a license"
+  spec.authors       = ["Jindrich Skupa / David Herman"]
+  spec.email         = ["dev@netbrick.eu"]
+  spec.description   = "Lita handlers for Redmine."
+  spec.summary       = "Lita handlers for Redmine issue management."
+  spec.homepage      = "https://github.com/netbrick/lita-redmine2"
+  spec.license       = "MIT"
   spec.metadata      = { "lita_plugin_type" => "handler" }
 
   spec.files         = `git ls-files`.split($/)
