@@ -480,7 +480,8 @@ module Lita
         when 'time_entries'
           time_entries = list['time_entries']
           time_entries.each do |t|
-            message << "Issue_id: #{t['issue']['id']}, spent_on: #{t['spent_on']}, hours: #{t['hours']}\n"
+            issue_id = t['issue'].nil? ? "" : t['issue']['id']
+            message << "Issue_id: #{issue_id}, spent_on: #{t['spent_on']}, hours: #{t['hours']}\n"
           end
         when 'time_entry_activities'
           time_entry_activities = list['time_entry_activities']
@@ -513,7 +514,7 @@ module Lita
       def decrypt_token(token, user_id)
         decrypted_token = encryptor.decrypt_string(token)
       rescue
-        encrypted_token = encryptor.encrypt_string(token)
+        encrypted_token = token.nil? ? '' : encryptor.encrypt_string(token)
         redis.set("user_#{user_id}", encrypted_token)
 
         token
