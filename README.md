@@ -1,10 +1,10 @@
-# lita-redmine
+# lita-redmine2
 
-Lita Redmine Plugin - Redmine handlers
+Lita Redmine Plugin - Redmine handlers with auth per user
 
 ## Installation
 
-Add lita-redmine to your Lita instance's Gemfile:
+Add lita-redmine2 to your Lita instance's Gemfile:
 
 ``` ruby
 gem "lita-redmine2", git: "https://github.com/netbrick/lita-redmine2", branch: "master"
@@ -23,7 +23,7 @@ redis-server
 
 ## Configuration
 
-add into lita_config.rb Redmine URL
+add into lita_config.rb Redmine URL and secret key for Redmine API encryption
 
 ``` ruby
 Lita.configure do |config|
