@@ -9,6 +9,17 @@ Add lita-redmine to your Lita instance's Gemfile:
 ``` ruby
 gem "lita-redmine2", git: "https://github.com/netbrick/lita-redmine2", branch: "master"
 ```
+or just
+
+``` ruby
+gem "lita-redmine2"
+```
+
+## Dependencies
+
+```
+redis-server
+```
 
 ## Configuration
 
@@ -48,5 +59,5 @@ redmine|rm unregister - Unregister API token
 redmine|rm token - Show registered token (PM)
 
 redmine|rm info - Display info
-<something>#<issue #><something> - Displays issue subject when mentoied in conversation
+<something>#<issue #><something> - Displays issue subject when mentioned in conversation
 ```
