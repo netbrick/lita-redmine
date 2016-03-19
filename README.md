@@ -28,11 +28,13 @@ add into lita_config.rb Redmine URL and secret key for Redmine API encryption
 ``` ruby
 Lita.configure do |config|
 ...
-  config.handlers.redmine.url = "https://redmine.site.cz"
-  config.handlers.redmine.secret_key = "<secret key to encrypt tokens in redis>"
+  config.handlers.redmine2.url = "https://redmine.site.cz"
+  config.handlers.redmine2.secret_key = "<secret key to encrypt tokens in redis>"
 ...
 end
 ```
+Secret key must be between 4 and 56 byte length.
+
 
 ## Usage
 
