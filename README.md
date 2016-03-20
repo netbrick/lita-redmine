@@ -33,7 +33,7 @@ Lita.configure do |config|
 ...
 end
 ```
-Secret key must be between 4 and 56 byte length.
+Secret key must be between 4 and 56 bytes length.
 
 
 ## Usage
